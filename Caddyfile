@@ -1,0 +1,26 @@
+http://react.micro-front.com {
+   proxy / localhost:8900 {
+        transparent
+   }
+  cors / {
+      origin http://localhost:8082
+  }
+}
+
+http://vue.micro-front.com {
+   proxy / localhost:8901 {
+        transparent
+   }
+  cors / {
+      origin http://localhost:8082
+  }
+}
+
+http://jquery.micro-front.com {
+   proxy / localhost:8902 {
+        transparent
+   }
+  cors / {
+      origin http://localhost:8082
+  }
+}

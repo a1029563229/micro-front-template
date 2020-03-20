@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<link href="https://cdn.bootcss.com/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+<body>
+  <section style="padding: 20px; color: green;">
+    <h1>Jquery 公共状态页</h1>
+    <button class="btn btn-primary dec"> - </button>
+    <span style="font-size: 24px; margin: 20px; color: green;">count:
+      <span id="count"></span>
+    </span>
+    <button class="btn btn-primary add"> + </button>
+  </section>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+  (function () {
+    function dispatch(action) {
+      if (!window.store) return;
+
+      return window.store.dispatch(action);
+    }
+
+    function subscribe(fn) {
+      if (!window.store) return;
+
+      return window.store.subscribe(fn);
+    }
+
+    function getState() {
+      if (!window.store) return {};
+
+      return window.store.getState();
+    }
+
+    var unSubscribe = null;
+    window.child = {
+      mount: function () {
+        var count = $("#count");
+        count.html(getState().count);
+
+        $(".add").click(function () {
+          dispatch({ type: "INCREMENT" })
+        });
+
+        $(".dec").click(function () {
+          dispatch({ type: "DECREMENT" })
+        });
+
+        unSubscribe = subscribe(function () {
+          count.html(getState().count);
+        });
+      },
+
+      unmount: function() {
+        unSubscribe && unSubscribe();
+      }
+    }
+  }())
+</script>
+<script src="/jquery/js/export.js"></script>
+
+</html>
