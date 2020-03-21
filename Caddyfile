@@ -1,9 +1,16 @@
+http://www.micro-front.com {
+   proxy / localhost:8888 {
+        transparent
+   }
+}
+
 http://react.micro-front.com {
    proxy / localhost:8900 {
         transparent
    }
   cors / {
-      origin http://localhost:8082
+      origin http://www.micro-front.com
+      origin http://localhost:8888
   }
 }
 
@@ -12,7 +19,8 @@ http://vue.micro-front.com {
         transparent
    }
   cors / {
-      origin http://localhost:8082
+      origin http://www.micro-front.com
+      origin http://localhost:8888
   }
 }
 
@@ -21,6 +29,7 @@ http://jquery.micro-front.com {
         transparent
    }
   cors / {
-      origin http://localhost:8082
+      origin http://www.micro-front.com
+      origin http://localhost:8888
   }
 }

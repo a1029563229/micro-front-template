@@ -1,6 +1,6 @@
 <template>
   <section class="frame-clone">
-    <div style="padding: 20px;">父应用主页</div>
+    <div style="padding: 20px;">主应用主页</div>
   </section>
 </template>
 <script>
