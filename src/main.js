@@ -6,6 +6,8 @@ import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import VueRouter from "vue-router";
 import store from "../store";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
 
 console.log(true);
 
@@ -84,22 +86,30 @@ registerMicroApps(
             activeRule: location => location.pathname === '/combine'
         },
     ], {
-        beforeLoad: app => console.log('before load', app.name),
+        beforeLoad: app => {
+            NProgress.start();
+            console.log('before load', app.name)
+        },
         beforeMount: [
             app => console.log('before mount', app.name),
         ],
+        afterMount: () => {
+            NProgress.done();
+        }
     }
 );
 
 start();
 
+const router = new VueRouter({
+    mode: "history",
+    routes: [{
+        path: "/",
+        component: Home
+    }]
+});
+
 new Vue({
-    router: new VueRouter({
-        mode: "history",
-        routes: [{
-            path: "/",
-            component: Home
-        }]
-    }),
+    router,
     render: h => h(App),
 }).$mount('#main-app')
