@@ -42,6 +42,10 @@ export default {
       ]
     }
   },
+
+  created(){
+    window.test = true;
+  },
   
   computed: {
     currentRoute() {
