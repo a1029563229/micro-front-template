@@ -20,4 +20,6 @@ yarn examples:install
 yarn examples:start
 ```
 
-> 注意事项：本架构采用 `caddy` 解决应用间跨域问题及生产部署问题，`caddy` 安装教程。
+> 注意事项：本架构采用 `caddy` 解决应用间跨域问题及生产部署问题，`caddy` 的安装和使用可以参照 [`caddy` 入门教程](http://shadows-mall.oss-cn-shenzhen.aliyuncs.com/images/blogs/micro-front/4.png)。
+>
+> 如果你不想使用 `caddy`，那么需要你手动解决跨域问题（通过 `webpack` 配置或者 `nginx`）。`caddy` 对本地开发和生产环境可以提供同一套跨域解决方案，强烈建议使用。
