@@ -45,6 +45,14 @@ export default {
 
   created(){
     window.test = true;
+    localStorage.setItem("a", 1);
+  },
+
+  mounted() {
+    // document.body.addEventListener("click", () => console.log("test"), false);
+    setInterval(() => {
+      console.log("interval")
+    }, 1000);
   },
   
   computed: {

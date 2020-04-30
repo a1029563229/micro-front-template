@@ -1,0 +1,21 @@
+import Vue from "vue";
+import Antd from "ant-design-vue";
+import VueRouter from "vue-router";
+
+import App from "./App.vue";
+import routes from "./routes";
+import "./assets/css/locale.antd.css";
+
+Vue.use(VueRouter);
+Vue.use(Antd);
+Vue.config.productionTip = false;
+
+const router = new VueRouter({
+  mode: "history",
+  routes
+});
+
+new Vue({
+  router,
+  render: h => h(App)
+}).$mount("#main-app");

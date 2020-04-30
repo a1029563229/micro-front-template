@@ -1,5 +1,5 @@
 http://www.micro-front.com {
-   proxy / localhost:8888 {
+   proxy / localhost:9999 {
         transparent
    }
 }

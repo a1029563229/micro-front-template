@@ -9,6 +9,8 @@ if (!window.isInContainer) {
   ReactDOM.render(<App />, document.getElementById('root'));
 }
 
+console.log("child exec")
+
 /**
  * bootstrap 只会在子应用初始化的时候调用一次，下次子应用重新进入时会直接调用 mount 钩子，不会再重复触发 bootstrap。
  * 通常我们可以在这里做一些全局变量的初始化，比如不会在 unmount 阶段被销毁的应用级别的缓存等。
