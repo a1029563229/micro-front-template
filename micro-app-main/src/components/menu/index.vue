@@ -1,6 +1,6 @@
 <template>
   <section class="cns-main-menu">
-   <a-menu mode="inline" theme="dark" :selectedKeys="[selectKey]">
+    <a-menu mode="inline" theme="dark" :selectedKeys="[selectKey]">
       <a-menu-item v-for="item in menus" :key="item.key" @click="changeMenu(item)">
         <router-link :to="{path: item.path }">
           <a-icon v-if="item.icon" :type="item.icon" />
@@ -28,58 +28,59 @@ export default class Menu extends Vue {
     {
       key: "Home",
       title: "主页",
-      path: "/",
+      path: "/"
     },
     {
       key: "Vue",
       title: "Vue 子应用",
-      path: "/vue",
+      path: "/vue"
     },
     {
       key: "React",
       title: "React 子应用",
-      path: "/react",
-    },
-    {
-      key: "Angular",
-      title: "Angular 子应用",
-      path: "/angular",
+      path: "/react"
     },
     {
       key: "VueList",
       title: "Vue 列表页",
-      path: "/vue/list",
+      path: "/vue/list"
     },
     {
       key: "ReactList",
       title: "React 列表页",
-      path: "/react/list",
-    },
-    {
-      key: "AngularList",
-      title: "Angular 列表页",
-      path: "/angular/list",
+      path: "/react/list"
     },
     {
       key: "MainCommunication",
       title: "主应用通讯页",
-      path: "/communication",
+      path: "/communication"
     },
     {
       key: "VueCommunication",
       title: "Vue 通讯页",
-      path: "/vue/communication",
+      path: "/vue/communication"
     },
     {
       key: "ReactCommunication",
       title: "React 通讯页",
-      path: "/react/communication",
+      path: "/react/communication"
     },
-    {
-      key: "AngularCommunication",
-      title: "Angular 通讯页",
-      path: "/angular/communication",
-    },
+    // Angular 应用暂时未接入
+    // {
+    //   key: "Angular",
+    //   title: "Angular 子应用",
+    //   path: "/angular"
+    // },
+    // {
+    //   key: "AngularList",
+    //   title: "Angular 列表页",
+    //   path: "/angular/list"
+    // },
+    // {
+    //   key: "AngularCommunication",
+    //   title: "Angular 通讯页",
+    //   path: "/angular/communication"
+    // }
   ];
 
   selectKey: string = "";

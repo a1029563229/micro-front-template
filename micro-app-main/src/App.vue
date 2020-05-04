@@ -7,7 +7,7 @@
         </section>
         <section class="cns-frame-wrapper">
           <router-view v-show="$route.name"></router-view>
-          <section v-show="!$route.name" id="cns-frame"></section>
+          <section v-show="!$route.name" id="frame"></section>
         </section>
       </template>
     </section>

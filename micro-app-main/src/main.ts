@@ -12,9 +12,9 @@ Vue.use(Antd);
 Vue.config.productionTip = false;
 
 mountApps({
-  sandbox: {
-    strictStyleIsolation: true,
-  },
+  // sandbox: {
+  //   strictStyleIsolation: true,
+  // },
 });
 
 const router = new VueRouter({

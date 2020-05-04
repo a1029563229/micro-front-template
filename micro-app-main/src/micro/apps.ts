@@ -11,12 +11,13 @@ const apps = [
     container: "#frame",
     activeRule: "/vue"
   },
-  {
-    name: "AngularMicroApp",
-    entry: "//localhost:10300",
-    container: "#frame",
-    activeRule: "/angular"
-  }
+  // Angular 应用暂时未接入
+  // {
+  //   name: "AngularMicroApp",
+  //   entry: "//localhost:10300",
+  //   container: "#frame",
+  //   activeRule: "/angular"
+  // }
 ];
 
 export default apps;

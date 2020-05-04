@@ -5,6 +5,9 @@ module.exports = {
   devServer: {
     port: 10200,
     disableHostCheck: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   configureWebpack: {
     resolve: {

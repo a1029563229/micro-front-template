@@ -15,32 +15,33 @@ const fetchVegetable = (page, pageSize) => {
 
 const { Column } = Table;
 const List = () => {
-  // 设置列表信息
-  const [data, setData] = useState([]);
-  // 设置页码信息
-  const [page, setPage] = useState(1);
-  const [pageInfo, setPageInfo] = useState();
-  useEffect(() => {
-    (async () => {
-      const result = await fetchVegetable(page, 10);
-      const { vegetableList } = result.data;
-      setData(() => vegetableList.items);
-      setPageInfo(() => ({
-        current: vegetableList.page,
-        pageSize: vegetableList.pageSize,
-        total: vegetableList.total,
-        onChange: page => setPage(page)
-      }));
-    })();
-  }, [page]);
+  // // 设置列表信息
+  // const [data, setData] = useState([]);
+  // // 设置页码信息
+  // const [page, setPage] = useState(1);
+  // const [pageInfo, setPageInfo] = useState();
+  // useEffect(() => {
+  //   (async () => {
+  //     const result = await fetchVegetable(page, 10);
+  //     const { vegetableList } = result.data;
+  //     setData(() => vegetableList.items);
+  //     setPageInfo(() => ({
+  //       current: vegetableList.page,
+  //       pageSize: vegetableList.pageSize,
+  //       total: vegetableList.total,
+  //       onChange: page => setPage(page)
+  //     }));
+  //   })();
+  // }, [page]);
 
-  return <Card title="React 子应用列表页">
-    <Table rowKey="_id" dataSource={data} pagination={pageInfo} >
-      <Column dataIndex="poster" render={text => <Avatar src={text} />} />
-      <Column dataIndex="name" />
-      <Column dataIndex="price" render={text => <>￥ {text}</>} />
-    </Table>
-  </Card>
+  // return <Card title="React 子应用列表页">
+  //   <Table rowKey="_id" dataSource={data} pagination={pageInfo} >
+  //     <Column dataIndex="poster" render={text => <Avatar src={text} />} />
+  //     <Column dataIndex="name" />
+  //     <Column dataIndex="price" render={text => <>￥ {text}</>} />
+  //   </Table>
+  // </Card>
+  return <section>List</section>
 }
 
 export default List;

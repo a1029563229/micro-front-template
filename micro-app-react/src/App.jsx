@@ -28,17 +28,18 @@ const menus = [
   }
 ]
 
+const BASE_NAME = window.__POWERED_BY_QIANKUN__ ? '/react' : '/';
 const App = () => {
   const [refresh, setRefresh] = useState(0);
   const [selectedKeys, setSelectKeys] = useState(['react']);
   useEffect(() => {
     const { pathname } = window.location;
-    const menu = menus.find(item => item.route === pathname);
+    const menu = menus.find(item => item.route === `${BASE_NAME.slice(1)}${pathname}`);
     setSelectKeys(() => ([menu ? menu.key : 'react']));
   }, [refresh]);
 
   return (
-    <Router basename={window.__POWERED_BY_QIANKUN__ ? '/react' : '/'}>
+    <Router basename={BASE_NAME}>
       <section>
         <Menu
           onClick={() => setRefresh(refresh => ++refresh)}

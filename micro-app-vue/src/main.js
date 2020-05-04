@@ -19,14 +19,13 @@ if (!window.__POWERED_BY_QIANKUN__) {
 
 function render(props = {}) {
   console.log(props);
-  
   router = new VueRouter({
     base: window.__POWERED_BY_QIANKUN__ ? "/vue" : "/",
     mode: "history",
     routes,
   });
 
-  new Vue({
+  instance = new Vue({
     router,
     render: (h) => h(App),
   }).$mount("#app");
