@@ -1,15 +1,21 @@
 const apps = [
   {
-    name: "react micro app",
-    entry: "//react.micro-front.com",
+    name: "ReactMicroApp",
+    entry: "//localhost:10100",
     container: "#frame",
     activeRule: "/react"
   },
   {
-    name: "vue micro app",
-    entry: "//vue.micro-front.com",
+    name: "VueMicroApp",
+    entry: "//localhost:10200",
     container: "#frame",
     activeRule: "/vue"
+  },
+  {
+    name: "AngularMicroApp",
+    entry: "//localhost:10300",
+    container: "#frame",
+    activeRule: "/angular"
   }
 ];
 

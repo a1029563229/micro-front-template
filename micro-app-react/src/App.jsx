@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Menu } from "antd";
 import Home from './pages/home';
 import List from './pages/list';
-import Status from './pages/status';
+import Communication from './pages/communication';
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 const menus = [
   {
     key: "react",
-    route: "/react",
+    route: "/",
     title: "主页"
   },
   {
     key: "react-list",
-    route: "/react/list",
+    route: "/list",
     title: "列表页"
   },
   {
-    key: "react-status",
-    route: "/react/status",
-    title: "状态页"
+    key: "react-communication",
+    route: "/communication",
+    title: "通讯页"
   },
   {
     key: "vue",
@@ -38,7 +38,7 @@ const App = () => {
   }, [refresh]);
 
   return (
-    <Router>
+    <Router basename={window.__POWERED_BY_QIANKUN__ ? '/react' : '/'}>
       <section>
         <Menu
           onClick={() => setRefresh(refresh => ++refresh)}
@@ -54,9 +54,8 @@ const App = () => {
         </Menu>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/react' component={Home} />
-          <Route path='/react/list' component={List} />
-          <Route path='/react/status' component={Status} />
+          <Route path='/list' component={List} />
+          <Route path='/communication' component={Communication} />
         </Switch>
       </section>
     </Router>

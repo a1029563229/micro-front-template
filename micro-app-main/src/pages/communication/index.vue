@@ -1,6 +1,6 @@
 <template>
-  <section class="home-container">
-    Home
+  <section class="communication-container">
+    Communication
   </section>
 </template>
 
@@ -8,11 +8,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class Home extends Vue {}
+export default class Communication extends Vue {}
 </script>
 
 <style lang="less" scoped>
-.home-container {
+.communication-container {
   padding: 30px;
 }
 </style>

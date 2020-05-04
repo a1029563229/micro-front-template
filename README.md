@@ -24,8 +24,10 @@ yarn examples:start
 
 由于 `qiankun` 内部使用的是 `Fetch HTML` 的方式加载子应用，所以会遇到跨域问题。我们需要先解决跨域问题，使我们的主应用可以正常加载子应用相关资源。
 
-在本项目架构中，采用 `caddy` 解决应用间跨域问题及生产部署问题，`caddy` 的安装和使用可以参照 [`caddy` 入门教程](http://shadows-mall.oss-cn-shenzhen.aliyuncs.com/images/blogs/micro-front/4.png)。
+在开发环境下，本项目配置了跨域解决方案，所以在直接运行项目并不会遇到跨域问题，生产环境的跨域问题可以参考下面的方案。
 
-如果你不想使用 `caddy`，那么需要你自己解决跨域问题（通过 `webpack` 配置或者 `nginx`）。
+#### 扩展阅读
 
-`caddy` 对本地开发和生产环境可以提供同一套跨域解决方案，建议使用。
+本项目在生产环境（和开发环境），采用 `caddy` 解决应用间跨域问题及生产部署问题，`caddy` 的安装和使用可以参照 [`caddy` 入门教程](http://shadows-mall.oss-cn-shenzhen.aliyuncs.com/images/blogs/micro-front/4.png)。
+
+`caddy` 可以在本地开发和生产环境可以提供同一套跨域解决方案，建议使用。如果你不想使用 `caddy`，那么也可以通过其他方案（如 `nginx` 等等）解决跨域问题。

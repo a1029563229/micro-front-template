@@ -21,18 +21,18 @@ export default {
       menus: [
         {
           key: "vue",
-          route: "/vue",
+          route: "/",
           title: "主页"
         },
         {
           key: "vue-list",
-          route: "/vue/list",
+          route: "/list",
           title: "列表页"
         },
         {
-          key: "vue-status",
-          route: "/vue/status",
-          title: "状态页"
+          key: "vue-communication",
+          route: "/communication",
+          title: "通讯页"
         },
         {
           key: "react",
@@ -43,18 +43,6 @@ export default {
     }
   },
 
-  created(){
-    window.test = true;
-    localStorage.setItem("a", 1);
-  },
-
-  mounted() {
-    // document.body.addEventListener("click", () => console.log("test"), false);
-    setInterval(() => {
-      console.log("interval")
-    }, 1000);
-  },
-  
   computed: {
     currentRoute() {
       const menu = this.menus.find(item => item.route === this.$route.path)

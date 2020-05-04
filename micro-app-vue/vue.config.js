@@ -2,9 +2,8 @@ const path = require('path');
 const packageName = require('./package.json').name;
 
 module.exports = {
-  publicPath: "http://vue.micro-front.com/",
   devServer: {
-    port: 8901,
+    port: 10200,
     disableHostCheck: true,
   },
   configureWebpack: {
