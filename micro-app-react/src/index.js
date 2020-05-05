@@ -18,7 +18,7 @@ export async function bootstrap() {
 
 export async function mount(props) {
   console.log("reactApp mount", props);
-  render();
+  render(props);
 }
 
 export async function unmount() {
