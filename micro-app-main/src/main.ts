@@ -5,7 +5,7 @@ import VueRouter from "vue-router";
 import App from "./App.vue";
 import routes from "./routes";
 import mountApps from "./micro";
-import "./assets/css/locale.antd.css";
+import "./assets/styles/locale.antd.css";
 
 Vue.use(VueRouter);
 Vue.use(Antd);

@@ -1,21 +1,26 @@
 <template>
   <a-config-provider prefixCls="cns">
-    <section id="cns-main-app">
-      <template>
-        <section class="cns-menu-wrapper">
-          <main-menu />
-        </section>
-        <section class="cns-frame-wrapper">
-          <router-view v-show="$route.name"></router-view>
-          <section v-show="!$route.name" id="frame"></section>
-        </section>
-      </template>
+    <section>
+      <section v-show="!$route.meta.withoutLayout" id="cns-main-app">
+        <template>
+          <section class="cns-menu-wrapper">
+            <main-menu />
+          </section>
+          <section class="cns-frame-wrapper">
+            <router-view v-show="$route.name" />
+            <section v-show="!$route.name" id="frame"></section>
+          </section>
+        </template>
+      </section>
+      <router-view v-show="$route.meta.withoutLayout" />
     </section>
   </a-config-provider>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+/* eslint-disable */
+import { Route } from "vue-router";
 
 import MainMenu from "@/components/menu/index.vue";
 
@@ -24,7 +29,9 @@ import MainMenu from "@/components/menu/index.vue";
     MainMenu
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  $route!: Route;
+}
 </script>
 
 <style lang="less" scoped>

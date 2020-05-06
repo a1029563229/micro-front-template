@@ -1,11 +1,9 @@
 <template>
-  <section class="home-container">
-    Home
-  </section>
+  <section class="home-container">Home</section>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class Home extends Vue {}
