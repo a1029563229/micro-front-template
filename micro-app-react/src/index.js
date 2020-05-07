@@ -3,12 +3,17 @@ import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 
 import App from "./App.jsx";
+import actions from "@/shared/actions";
 
 if (!window.__POWERED_BY_QIANKUN__) {
   render();
 }
 
-function render(props = {}) {
+function render(props) {
+  if (props) {
+    actions.setActions(props);
+  }
+  
   ReactDOM.render(<App />, document.getElementById("root"));
 }
 

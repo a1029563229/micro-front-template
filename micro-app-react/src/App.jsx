@@ -35,9 +35,6 @@ const App = () => {
   const [selectedKeys, setSelectKeys] = useState(["react"]);
   useEffect(() => {
     const { pathname } = window.location;
-    console.log({ BASE_NAME });
-    console.log({ pathname });
-    console.log({ menus });
     const menu = menus.find(
       (item) => `${BASE_NAME}${item.route}` === pathname
     );

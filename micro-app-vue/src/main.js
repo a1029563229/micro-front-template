@@ -6,6 +6,7 @@ import "ant-design-vue/dist/antd.css";
 import "./public-path";
 import App from "./App.vue";
 import routes from "./routes";
+import actions from "@/shared/actions";
 
 Vue.use(Antd);
 Vue.config.productionTip = false;
@@ -17,8 +18,15 @@ if (!window.__POWERED_BY_QIANKUN__) {
   render()
 }
 
-function render(props = {}) {
-  const { container } = props;
+/**
+ * 渲染函数
+ * 主应用生命周期钩子中运行/子应用单独启动时运行
+ */
+function render(props) {
+  if (props) {
+    // 注入 actions 实例
+    actions.setActions(props);
+  }
 
   router = new VueRouter({
     base: window.__POWERED_BY_QIANKUN__ ? "/vue" : "/",
@@ -26,10 +34,11 @@ function render(props = {}) {
     routes,
   });
 
+  // 挂载应用
   instance = new Vue({
     router,
     render: (h) => h(App),
-  }).$mount(container ? container.querySelector("#app") : "#app");
+  }).$mount("#app");
 }
 
 export async function bootstrap() {
