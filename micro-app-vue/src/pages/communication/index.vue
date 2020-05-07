@@ -22,8 +22,8 @@
   </section>
 </template>
 <script>
-// 引入 actions 实例
-import actions from "@/shared/actions";
+// 引入 SharedModule
+import SharedModule from "@/shared";
 import { ApiGetUserInfo } from "@/apis";
 
 export default {
@@ -36,19 +36,17 @@ export default {
   },
 
   mounted() {
-    // 添加观察者
-    // onGlobalStateChange 第二个入参为 true，代表立即执行一次观察者函数
-    actions.onGlobalStateChange(state => {
-      const { token } = state;
-      // 未登录 - 返回主页
-      if (!token) {
-        this.$message.error("未检测到登录信息！");
-        return this.$router.push("/");
-      }
+    const shared = SharedModule.getShared();
+    // 使用 shared 获取 token
+    const token = shared.getToken();
 
-      // 获取用户信息
-      this.getUserInfo(token);
-    }, true);
+    // 未登录 - 返回主页
+    if (!token) {
+      this.$message.error("未检测到登录信息！");
+      return this.$router.push("/");
+    }
+
+    this.getUserInfo(token);
   },
 
   methods: {

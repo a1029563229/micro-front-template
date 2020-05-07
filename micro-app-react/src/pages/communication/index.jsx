@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Descriptions, Avatar, message } from "antd";
 
-import actions from "@/shared/actions";
+import SharedModule from "@/shared";
 import { ApiGetUserInfo } from "@/apis";
 
 const Status = () => {
@@ -10,15 +10,16 @@ const Status = () => {
 
   const [token, setToken] = useState();
   useEffect(() => {
-    actions.onGlobalStateChange((state) => {
-      const { token } = state;
-      // 未登录 - 返回主页
-      if (!token) {
-        message.error("未检测到登录信息！");
-        return history.push("/");
-      }
-      setToken(token);
-    }, true);
+    const shared = SharedModule.getShared();
+    const token = shared.getToken();
+
+    // 未登录 - 返回主页
+    if (!token) {
+      message.error("未检测到登录信息！");
+      return history.push("/");
+    }
+    
+    setToken(token);
   }, [history]);
 
   const [userInfo, setUserInfo] = useState({});
