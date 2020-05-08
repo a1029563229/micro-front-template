@@ -3,16 +3,17 @@ import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 
 import App from "./App.jsx";
-import SharedModule from "@/shared";
+import actions from "@/shared/actions";
 
 if (!window.__POWERED_BY_QIANKUN__) {
   render();
 }
 
 function render(props = {}) {
-  // 当传入的 shared 不为空时，则重载子应用的 shared
-  const { shared = SharedModule.getShared() } = props;
-  SharedModule.overloadShared(shared);
+  if (props) {
+    // 注入 actions 实例
+    actions.setActions(props);
+  }
   
   ReactDOM.render(<App />, document.getElementById("root"));
 }

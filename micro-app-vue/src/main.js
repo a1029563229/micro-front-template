@@ -6,7 +6,7 @@ import "ant-design-vue/dist/antd.css";
 import "./public-path";
 import App from "./App.vue";
 import routes from "./routes";
-import SharedModule from "@/shared";
+import actions from "@/shared/actions";
 
 Vue.use(Antd);
 Vue.config.productionTip = false;
@@ -23,10 +23,10 @@ if (!window.__POWERED_BY_QIANKUN__) {
  * 主应用生命周期钩子中运行/子应用单独启动时运行
  */
 function render(props = {}) {
-  // 当传入的 shared 为空时，使用子应用自身的 shared
-  // 当传入的 shared 不为空时，主应用传入的 shared 将会重载子应用的 shared
-  const { shared = SharedModule.getShared() } = props;
-  SharedModule.overloadShared(shared);
+  if (props) {
+    // 注入 actions 实例
+    actions.setActions(props);
+  }
 
   router = new VueRouter({
     base: window.__POWERED_BY_QIANKUN__ ? "/vue" : "/",
