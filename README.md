@@ -14,9 +14,12 @@
 
 ## 如何运行
 
-本仓库基于 `qiankun` 实现微前端架构，借鉴了 `qiankun` 提供的 [官方案例](https://github.com/umijs/qiankun)，运行命令如下：
+> 本项目使用的端口为 `9999、10100、10200`，运行前请确保这几个端口的空闲。
+
+本仓库基于 `qiankun` 实现微前端架构，运行命令如下：
 
 ```bash
+yarn install
 yarn examples:install
 yarn examples:start
 ```

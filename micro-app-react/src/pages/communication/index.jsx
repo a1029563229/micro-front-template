@@ -22,7 +22,7 @@ const Status = () => {
     setToken(token);
   }, [history]);
 
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState();
   useEffect(() => {
     if (!token) return;
 
@@ -32,6 +32,8 @@ const Status = () => {
       setUserInfo(result.data.getUserInfo);
     })();
   }, [token]);
+
+  if (!userInfo) return null;
 
   return (
     <section>

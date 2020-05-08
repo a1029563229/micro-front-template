@@ -1,12 +1,13 @@
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { message } from "ant-design-vue";
+// 当前版本 qiankun 对 insertBefore 处理有问题，这里先使用修改后的本地包
 import {
   registerMicroApps,
   addGlobalUncaughtErrorHandler,
   runAfterFirstMounted,
   start,
-} from "qiankun";
+} from "./es";
 
 import apps from "./apps";
 
