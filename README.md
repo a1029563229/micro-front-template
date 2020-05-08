@@ -4,7 +4,7 @@
 
 > 微前端是一种类似于微服务的架构，它将微服务的理念应用于浏览器端，即将单页面前端应用由单一的单体应用转变为多个小型前端应用聚合为一的应用。各个前端应用还可以独立开发、独立部署。同时，它们也可以在共享组件的同时进行并行开发——这些组件可以通过 NPM 或者 Git Tag、Git Submodule 来管理。
 
-本项目是基于 `qiankun` 搭建的微前端架构 `Demo`，你也可以当成 `qiankun-start` 来使用。
+本项目是基于 `qiankun` 搭建的微前端架构 `Demo`，你也可以当成 `qiankun-quick-start` 来使用。
 
 本项目使用 `Vue` 作为主应用基座，嵌入了 `Vue` 和 `React` 两个子应用，架构图和效果图如下：
 
@@ -28,7 +28,7 @@ yarn examples:start
 
 `master` 为稳定分支，其他分支根据 [qiankun 实战系列教程](https://github.com/a1029563229/blogs) 划分：
 
-  - `master`：稳定分支，可以直接作为 `qiankun-start` 使用；
+  - `master`：稳定分支，可以直接作为 `qiankun-quick-start` 使用；
   - `feature-communication`：官方通信方案；
   - `feature-communication-shared`：`Shared` 通信方案；
 
