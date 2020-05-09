@@ -6,16 +6,22 @@ const apps = [
    * activeRule: 微应用触发的路由规则 - 触发路由规则后将加载该微应用
    */
   {
+    name: "ReactMicroApp",
+    entry: "//localhost:10100",
+    container: "#frame",
+    activeRule: "/react"
+  },
+  {
     name: "VueMicroApp",
     entry: "//localhost:10200",
     container: "#frame",
     activeRule: "/vue"
   },
   {
-    name: "ReactMicroApp",
-    entry: "//localhost:10100",
+    name: "AngularMicroApp",
+    entry: "//localhost:10300",
     container: "#frame",
-    activeRule: "/react"
+    activeRule: "/angular"
   },
 ];
 

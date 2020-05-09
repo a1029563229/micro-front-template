@@ -1,0 +1,18 @@
+<nz-table #basicTable [nzData]="list">
+  <thead>
+    <tr>
+      <th>图片</th>
+      <th>名称</th>
+      <th>价格</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>
+        <nz-avatar [nzSize]="48" [nzSrc]="data.poster"></nz-avatar>
+      </td>
+      <td>{{ data.name }}</td>
+      <td>￥ {{ data.price }}</td>
+    </tr>
+  </tbody>
+</nz-table>

@@ -1,0 +1,11 @@
+<section>
+  <ul nz-menu nzMode="horizontal" nzTheme="dark">
+    <li *ngFor="let item of menus" nz-menu-item [nzSelected]="currentRoute === item.key">
+      <a [routerLink]="item.route">{{item.title}}</a>
+    </li>
+  </ul>
+  
+  <section style="padding: 20px;">
+    <router-outlet></router-outlet>
+  </section>
+</section>

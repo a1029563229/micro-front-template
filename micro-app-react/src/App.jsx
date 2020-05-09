@@ -31,6 +31,7 @@ const App = () => {
   }, [refresh]);
 
   return (
+    // 设置路由命名空间
     <Router basename={BASE_NAME}>
       <section>
         <Menu
