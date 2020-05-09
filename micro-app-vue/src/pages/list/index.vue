@@ -1,6 +1,6 @@
 <template>
   <section>
-    <a-card title="Vue 子应用列表页">
+    <a-card title="Vue 微应用列表页">
       <a-table rowKey="_id" :dataSource="data" :pagination="pageInfo">
         <a-table-column title="菜名" dataIndex="name" />
         <a-table-column title="价格" dataIndex="price" :customRender="(text) => `￥ ${text}`" />
