@@ -11,6 +11,12 @@ const apps = [
     container: "#frame",
     activeRule: "/vue"
   },
+  {
+    name: "ReactMicroApp",
+    entry: "//localhost:10100",
+    container: "#frame",
+    activeRule: "/react"
+  },
 ];
 
 export default apps;

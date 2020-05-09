@@ -1,0 +1,45 @@
+{
+  "name": "react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^4.0.3",
+    "axios": "^0.19.2",
+    "cra-template": "1.0.3",
+    "isomorphic-fetch": "^2.2.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "styled-jsx": "^3.2.5"
+  },
+  "devDependencies": {
+    "npm-force-resolutions": "^0.0.3",
+    "react-app-rewired": "^2.1.6"
+  },
+  "resolutions": {
+    "moment": "2.24.0"
+  },
+  "preinstall": "npx npm-force-resolutions",
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
