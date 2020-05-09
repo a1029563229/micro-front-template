@@ -1,4 +1,5 @@
 const path = require('path');
+const packageName = require('./package.json').name;
 
 module.exports = {
   devServer: {
@@ -19,7 +20,7 @@ module.exports = {
     output: {
       library: "VueMicroApp",
       libraryTarget: 'umd',
-      jsonpFunction: `webpackJsonp_VueMicroApp`,
+      jsonpFunction: `webpackJsonp_${packageName}`,
     }
   }
 

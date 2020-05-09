@@ -6,27 +6,29 @@ import "ant-design-vue/dist/antd.css";
 import "./public-path";
 import App from "./App.vue";
 import routes from "./routes";
+import SharedModule from "@/shared";
 
-Vue.use(VueRouter);
 Vue.use(Antd);
 Vue.config.productionTip = false;
 
 let instance = null;
 let router = null;
 
-// 独立运行时，直接挂载应用
 if (!window.__POWERED_BY_QIANKUN__) {
   render()
 }
 
 /**
  * 渲染函数
- * 两种情况：主应用生命周期钩子中运行 / 微应用单独启动时运行
+ * 主应用生命周期钩子中运行/子应用单独启动时运行
  */
-function render() {
-  // 在 render 中创建 VueRouter，可以保证在卸载微应用时，移除 location 事件监听，防止事件污染
+function render(props = {}) {
+  // 当传入的 shared 为空时，使用子应用自身的 shared
+  // 当传入的 shared 不为空时，主应用传入的 shared 将会重载子应用的 shared
+  const { shared = SharedModule.getShared() } = props;
+  SharedModule.overloadShared(shared);
+
   router = new VueRouter({
-    // 运行在主应用中时，添加路由命名空间 /vue
     base: window.__POWERED_BY_QIANKUN__ ? "/vue" : "/",
     mode: "history",
     routes,
@@ -40,16 +42,16 @@ function render() {
 }
 
 export async function bootstrap() {
-  console.log("VueMicroApp bootstraped");
+  console.log("vue app bootstraped");
 }
 
 export async function mount(props) {
-  console.log("VueMicroApp mount", props);
+  console.log("vue mount", props);
   render(props);
 }
 
 export async function unmount() {
-  console.log("VueMicroApp unmount");
+  console.log("vue unmount");
   instance.$destroy();
   instance = null;
   router = null;

@@ -1,26 +1,23 @@
 <template>
   <a-config-provider prefixCls="cns">
-    <section>
-      <section v-show="!$route.meta.withoutLayout" id="cns-main-app">
-        <template>
-          <section class="cns-menu-wrapper">
-            <main-menu />
-          </section>
-          <section class="cns-frame-wrapper">
-            <router-view v-show="$route.name" />
-            <section v-show="!$route.name" id="frame"></section>
-          </section>
-        </template>
+    <section id="cns-main-app">
+      <section class="cns-menu-wrapper">
+        <main-menu :menus="menus" />
       </section>
-      <router-view v-show="$route.meta.withoutLayout" />
+      <section class="cns-frame-wrapper">
+        <!-- 主应用渲染区，用于挂载主应用路由触发的组件 -->
+        <router-view v-show="$route.name" />
+        
+        <!-- 子应用渲染区，用于挂载子应用节点 -->
+        <section v-show="!$route.name" id="frame"></section>
+
+      </section>
     </section>
   </a-config-provider>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-/* eslint-disable */
-import { Route } from "vue-router";
 
 import MainMenu from "@/components/menu/index.vue";
 
@@ -30,7 +27,29 @@ import MainMenu from "@/components/menu/index.vue";
   }
 })
 export default class App extends Vue {
-  $route!: Route;
+  /**
+   * 菜单列表
+   * key: 唯一 Key 值
+   * title: 菜单标题
+   * path: 菜单对应的路径
+   */
+  menus = [
+    {
+      key: "Home",
+      title: "主页",
+      path: "/"
+    },
+    {
+      key: "VueMicroApp",
+      title: "Vue 主页",
+      path: "/vue"
+    },
+    {
+      key: "VueMicroAppList",
+      title: "Vue 列表页",
+      path: "/vue/list"
+    },
+  ];
 }
 </script>
 
