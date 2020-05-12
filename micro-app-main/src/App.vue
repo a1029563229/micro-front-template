@@ -7,10 +7,9 @@
       <section class="cns-frame-wrapper">
         <!-- 主应用渲染区，用于挂载主应用路由触发的组件 -->
         <router-view v-show="$route.name" />
-        
+
         <!-- 子应用渲染区，用于挂载子应用节点 -->
         <section v-show="!$route.name" id="frame"></section>
-
       </section>
     </section>
   </a-config-provider>
@@ -39,26 +38,26 @@ export default class App extends Vue {
       title: "主页",
       path: "/"
     },
-    // {
-    //   key: "VueMicroApp",
-    //   title: "Vue 主页",
-    //   path: "/vue"
-    // },
-    // {
-    //   key: "VueMicroAppList",
-    //   title: "Vue 列表页",
-    //   path: "/vue/list"
-    // },
-    // {
-    //   key: "ReactMicroApp",
-    //   title: "React 主页",
-    //   path: "/react"
-    // },
-    // {
-    //   key: "ReactMicroAppList",
-    //   title: "React 列表页",
-    //   path: "/react/list"
-    // },
+    {
+      key: "VueMicroApp",
+      title: "Vue 主页",
+      path: "/vue"
+    },
+    {
+      key: "VueMicroAppList",
+      title: "Vue 列表页",
+      path: "/vue/list"
+    },
+    {
+      key: "ReactMicroApp",
+      title: "React 主页",
+      path: "/react"
+    },
+    {
+      key: "ReactMicroAppList",
+      title: "React 列表页",
+      path: "/react/list"
+    },
     {
       key: "AngularMicroApp",
       title: "Angular 主页",
@@ -69,6 +68,11 @@ export default class App extends Vue {
       title: "Angular 列表页",
       path: "/angular/list"
     },
+    {
+      key: "StaticMicroApp",
+      title: "Static 微应用",
+      path: "/static"
+    }
   ];
 }
 </script>

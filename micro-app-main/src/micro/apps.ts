@@ -23,6 +23,12 @@ const apps = [
     container: "#frame",
     activeRule: "/angular"
   },
+  {
+    name: "StaticMicroApp",
+    entry: "//localhost:10400",
+    container: "#frame",
+    activeRule: "/static"
+  },
 ];
 
 export default apps;
