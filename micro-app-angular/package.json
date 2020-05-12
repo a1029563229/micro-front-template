@@ -7,7 +7,9 @@
     "build": "ng build --prod --deploy-url http://localhost:10300",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:single-spa:micro-app-angular": "ng build micro-app-angular --prod --deploy-url http://localhost:4200/",
+    "serve:single-spa:micro-app-angular": "ng s --project micro-app-angular --disable-host-check --port 4200 --deploy-url http://localhost:4200/ --live-reload false"
   },
   "private": true,
   "dependencies": {
@@ -21,10 +23,13 @@
     "@angular/router": "~9.1.6",
     "ng-zorro-antd": "^9.1.0",
     "rxjs": "~6.5.4",
+    "single-spa": "^5.4.0",
+    "single-spa-angular": "^4.1.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-builders/custom-webpack": "^9",
     "@angular-devkit/build-angular": "~0.901.5",
     "@angular/cli": "~9.1.5",
     "@angular/compiler-cli": "~9.1.6",
