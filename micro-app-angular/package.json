@@ -3,13 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --disable-host-check --port 10300",
+    "start": "ng serve --disable-host-check --port 10300 --base-href /angular",
     "build": "ng build --prod --deploy-url http://localhost:10300",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:single-spa:micro-app-angular": "ng build micro-app-angular --prod --deploy-url http://localhost:4200/",
-    "serve:single-spa:micro-app-angular": "ng s --project micro-app-angular --disable-host-check --port 4200 --deploy-url http://localhost:4200/ --live-reload false"
+    "build:single-spa:micro-app-angular": "ng build micro-app-angular --prod --deploy-url http://localhost:4200/"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +25,7 @@
     "single-spa": "^5.4.0",
     "single-spa-angular": "^4.1.0",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "^0.10.3"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^9",

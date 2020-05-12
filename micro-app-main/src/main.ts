@@ -11,6 +11,9 @@ Vue.use(VueRouter);
 Vue.use(Antd);
 Vue.config.productionTip = false;
 
+// 为 Angular 微应用所做的 zone 包注入
+import "zone.js/dist/zone";
+
 startQiankun();
 
 /**

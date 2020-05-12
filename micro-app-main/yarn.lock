@@ -8885,3 +8885,8 @@ yorkie@^2.0.0:
     is-ci "^1.0.10"
     normalize-path "^1.0.0"
     strip-indent "^2.0.0"
+
+zone.js@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.npm.taobao.org/zone.js/download/zone.js-0.10.3.tgz#3e5e4da03c607c9dcd92e37dd35687a14a140c16"
+  integrity sha1-Pl5NoDxgfJ3NkuN901aHoUoUDBY=
