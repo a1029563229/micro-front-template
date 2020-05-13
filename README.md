@@ -6,21 +6,21 @@
 
 本项目是基于 `qiankun` 搭建的微前端架构 `Demo`，你也可以当成 `qiankun-quick-start` 来使用。
 
-本项目使用 `Vue` 作为主应用基座，嵌入了 `Vue` 和 `React` 两个子应用，架构图和效果图如下：
+本项目使用 `Vue` 作为主应用基座，嵌入了 `Vue、React、Angular、Jquery...` 等等多个技术栈的微应用，架构图和效果图如下：
 
 ![架构图](http://shadows-mall.oss-cn-shenzhen.aliyuncs.com/images/blogs/qiankun_practice/8.png)
 
-![效果图](http://shadows-mall.oss-cn-shenzhen.aliyuncs.com/images/blogs/qiankun_practice/7.png)
+![效果图](http://shadows-mall.oss-cn-shenzhen.aliyuncs.com/images/blogs/qiankun_practice/42.png)
 
 ## 如何运行
 
 > 本项目使用的端口为 `9999、10100、10200、10300、10400`，运行前请确保这几个端口的空闲。
 >
-> 全量启动项目会比较慢，适合只查看项目运行效果。
+> 全量启动项目会比较慢（`Angular` 微应用第一次启动会很慢），需要耐心等待一会儿，适合只查看项目运行效果的童鞋。
 > 
-> 需要调试的童鞋，建议手动启动主应用和各个微应用。
+> 如果需要调试项目查看效果，建议手动启动主应用和所需的微应用。
 
-本仓库基于 `qiankun` 实现微前端架构，运行命令如下：
+本仓库基于 `qiankun` 实现微前端架构，运行命令（全量启动）如下：
 
 ```bash
 yarn install
@@ -33,6 +33,7 @@ yarn examples:start
 `master` 为稳定分支，其他分支根据 [qiankun 实战系列教程](https://github.com/a1029563229/blogs) 划分：
 
   - `master`：稳定分支，可以直接作为 `qiankun-quick-start` 使用；
+  - `feature-inject-sub-apps`：主应用基座搭建、微应用接入方案；
   - `feature-communication`：官方通信方案；
   - `feature-communication-shared`：`Shared` 通信方案；
 

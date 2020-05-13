@@ -11,7 +11,11 @@
     "install:react": "cd micro-app-react && yarn",
     "start:react": "cd micro-app-react && yarn start",
     "install:vue": "cd micro-app-vue && yarn",
-    "start:vue": "cd micro-app-vue && yarn serve"
+    "start:vue": "cd micro-app-vue && yarn serve",
+    "install:angular": "cd micro-app-angular && yarn",
+    "start:angular": "cd micro-app-angular && yarn start",
+    "install:static": "cd micro-app-static && yarn",
+    "start:static": "cd micro-app-static && yarn start"
   },
   "repository": {
     "type": "git",

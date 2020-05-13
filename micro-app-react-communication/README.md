@@ -1,4 +1,4 @@
-# React 微应用
+# React 微应用 - 包含应用间通信
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

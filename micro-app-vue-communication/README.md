@@ -1,4 +1,4 @@
-# Vue 微应用
+# Vue 微应用 - 包含应用间通信
 
 ## Project setup
 ```
