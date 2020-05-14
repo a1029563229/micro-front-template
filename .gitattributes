@@ -1,5 +1,6 @@
 *.js linguist-language=javascript;
 *.ts linguist-language=javascript;
+*.vue linguist-language=javascript;
 *.scss linguist-language=javascript;
 *.less linguist-language=javascript;
 *.css linguist-language=javascript;
