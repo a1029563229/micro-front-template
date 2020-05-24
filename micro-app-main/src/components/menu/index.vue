@@ -61,6 +61,11 @@ export default class Menu extends Vue {
       path: "/vue/communication"
     },
     {
+      key: "VueCommunicationToParent",
+      title: "Vue 通讯页2",
+      path: "/vue/communicationToParent"
+    },
+    {
       key: "ReactCommunication",
       title: "React 通讯页",
       path: "/react/communication"

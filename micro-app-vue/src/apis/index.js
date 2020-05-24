@@ -23,3 +23,12 @@ export const ApiGetUserInfo = (token) => {
     }
   );
 };
+
+/**
+ * 快速登录
+ */
+export const ApiLoginQuickly = () => {
+  return instance.post("/member", {
+    query: "{ loginQuickly { token } }",
+  });
+};

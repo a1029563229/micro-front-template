@@ -21,6 +21,11 @@ const routes = [
     name: 'Communication',
     component: () => import('@pages/communication/index.vue')
   },
+  {
+    path: '/communicationToParent',
+    name: 'CommunicationToParent',
+    component: () => import('@pages/communicationToParent/index.vue')
+  },
 ]
 
 export default routes
