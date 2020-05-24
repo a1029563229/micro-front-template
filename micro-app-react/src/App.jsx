@@ -15,7 +15,7 @@ const menus = [
     key: "react-list",
     route: "/list",
     title: "列表页",
-  }
+  },
 ];
 
 const BASE_NAME = window.__POWERED_BY_QIANKUN__ ? "/react" : "";
@@ -24,14 +24,12 @@ const App = () => {
   const [selectedKeys, setSelectKeys] = useState(["react"]);
   useEffect(() => {
     const { pathname } = window.location;
-    const menu = menus.find(
-      (item) => `${BASE_NAME}${item.route}` === pathname
-    );
+    const menu = menus.find((item) => `${BASE_NAME}${item.route}` === pathname);
     setSelectKeys(() => [menu ? menu.key : "react"]);
   }, [refresh]);
 
+  // 设置路由命名空间
   return (
-    // 设置路由命名空间
     <Router basename={BASE_NAME}>
       <section>
         <Menu

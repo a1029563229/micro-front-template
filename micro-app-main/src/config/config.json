@@ -1,0 +1,14 @@
+{
+  "development": {
+    "REACT_MICRO_APP": "//localhost:10100",
+    "VUE_MICRO_APP": "//localhost:10200",
+    "ANGULAR_MICRO_APP": "//localhost:10300",
+    "STATIC_MICRO_APP": "//localhost:10400"
+  },
+  "production": {
+    "REACT_MICRO_APP": "//react.micro-app-front.com",
+    "VUE_MICRO_APP": "//vue.micro-app-front.com",
+    "ANGULAR_MICRO_APP": "//angular.micro-app-front.com",
+    "STATIC_MICRO_APP": "//static.micro-app-front.com"
+  }
+}

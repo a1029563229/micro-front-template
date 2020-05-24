@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- 引入 bootstrap -->
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <title>Jquery App</title>
+  </head>
+
+  <body>
+    <section
+      id="jquery-app-container"
+      style="padding: 20px; color: blue;"
+    ></section>
+  </body>
+  <!-- 引入 jquery -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    /**
+     * 请求接口数据，构建 HTML
+     */
+    async function buildHTML() {
+      const result = await fetch("http://dev-api.jt-gmall.com/mall", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // graphql 的查询风格
+        body: JSON.stringify({
+          query: `{ vegetableList (page: 1, pageSize: 20) { page, pageSize, total, items { _id, name, poster, price } } }`,
+        }),
+      }).then((res) => res.json());
+      const list = result.data.vegetableList.items;
+      const html = `<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">菜名</th>
+      <th scope="col">图片</th>
+      <th scope="col">报价</th>
+    </tr>
+  </thead>
+  <tbody>
+    ${list
+      .map(
+        (item) => `
+    <tr>
+      <td>
+        <img style="width: 40px; height: 40px; border-radius: 100%;" src="${item.poster}"></img>
+      </td>
+      <td>${item.name}</td>
+      <td>￥ ${item.price}</td>
+    </tr>
+      `
+      )
+      .join("")}
+  </tbody>
+</table>`;
+      return html;
+    }
+
+    /**
+     * 渲染函数
+     * 两种情况：主应用生命周期钩子中运行 / 微应用单独启动时运行
+     */
+    const render = async ($) => {
+      const html = await buildHTML();
+      $("#jquery-app-container").html(html);
+      return Promise.resolve();
+    };
+
+    // 独立运行时，直接挂载应用
+    if (!window.__POWERED_BY_QIANKUN__) {
+      render($);
+    }
+
+    ((global) => {
+      /**
+       * 注册微应用生命周期钩子函数
+       * global[appName] 中的 appName 与主应用中注册的微应用名称一致
+       */
+      global["StaticMicroApp"] = {
+        /**
+         * bootstrap 只会在微应用初始化的时候调用一次，下次微应用重新进入时会直接调用 mount 钩子，不会再重复触发 bootstrap。
+         * 通常我们可以在这里做一些全局变量的初始化，比如不会在 unmount 阶段被销毁的应用级别的缓存等。
+         */
+        bootstrap: () => {
+          console.log("MicroJqueryApp bootstraped");
+          return Promise.resolve();
+        },
+        /**
+         * 应用每次进入都会调用 mount 方法，通常我们在这里触发应用的渲染方法
+         */
+        mount: () => {
+          console.log("MicroJqueryApp mount");
+          return render($);
+        },
+        /**
+         * 应用每次 切出/卸载 会调用的方法，通常在这里我们会卸载微应用的应用实例
+         */
+        unmount: () => {
+          console.log("MicroJqueryApp unmount");
+          return Promise.resolve();
+        },
+      };
+    })(window);
+  </script>
+</html>

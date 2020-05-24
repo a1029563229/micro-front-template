@@ -1,0 +1,41 @@
+http://www.micro-app-front.com {
+     root * ./micro-app-main
+     file_server
+     try_files {path} ./index.html
+}
+
+http://vue.micro-app-front.com {
+     root * ./micro-app-vue
+     file_server
+     try_files {path} ./index.html
+     header Access-Control-Allow-Origin *
+     header Access-Control-Allow-Headers *
+     header Access-Control-Allow-Methods *
+}
+
+http://react.micro-app-front.com {
+     root * ./micro-app-react
+     file_server
+     try_files {path} ./index.html
+     header Access-Control-Allow-Origin *
+     header Access-Control-Allow-Headers *
+     header Access-Control-Allow-Methods *
+}
+
+http://angular.micro-app-front.com {
+     root * ./micro-app-angular
+     file_server
+     try_files {path} ./index.html
+     header Access-Control-Allow-Origin *
+     header Access-Control-Allow-Headers *
+     header Access-Control-Allow-Methods *
+}
+
+http://static.micro-app-front.com {
+     root * ./micro-app-static
+     file_server
+     try_files {path} ./index.html
+     header Access-Control-Allow-Origin *
+     header Access-Control-Allow-Headers *
+     header Access-Control-Allow-Methods *
+}

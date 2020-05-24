@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --disable-host-check --port 10300 --base-href /angular",
-    "build": "ng build --prod --deploy-url http://localhost:10300",
+    "build": "ng build --prod --base-href /angular",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
