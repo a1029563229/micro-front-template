@@ -22,6 +22,7 @@ import { Component, Vue } from "vue-property-decorator";
 /* eslint-disable */
 import { Route } from "vue-router";
 
+import actions from "@/shared/actions";
 import MainMenu from "@/components/menu/index.vue";
 
 @Component({
@@ -31,6 +32,16 @@ import MainMenu from "@/components/menu/index.vue";
 })
 export default class App extends Vue {
   $route!: Route;
+
+  // `mounted` 是 Vue 的生命周期钩子函数，在组件挂载时执行
+  mounted() {
+    // 注册一个观察者函数
+    actions.onGlobalStateChange((state, prevState) => {
+      // state: 变更后的状态; prevState: 变更前的状态
+      console.log("主应用观察者：globalState 改变前的值为 ", prevState);
+      console.log("主应用观察者：登录状态发生改变，改变后的 globalState 的值为 ", state);
+    });
+  }
 }
 </script>
 
