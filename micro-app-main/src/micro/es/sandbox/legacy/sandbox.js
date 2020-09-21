@@ -1,6 +1,14 @@
+import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
+import _classCallCheck from "@babel/runtime/helpers/esm/classCallCheck";
+import _createClass from "@babel/runtime/helpers/esm/createClass";
 import _typeof from "@babel/runtime/helpers/esm/typeof";
-import { __read, __spread } from "tslib";
-import { isConstructable } from '../../utils';
+
+/**
+ * @author Kuitos
+ * @since 2019-04-11
+ */
+import { SandBoxType } from '../../interfaces';
+import { getTargetValue } from '../common';
 
 function isPropConfigurable(target, prop) {
   var descriptor = Object.getOwnPropertyDescriptor(target, prop);
@@ -24,10 +32,10 @@ function setWindowProp(prop, value, toDelete) {
  */
 
 
-var SingularProxySandbox =
-/** @class */
-function () {
+var SingularProxySandbox = /*#__PURE__*/function () {
   function SingularProxySandbox(name) {
+    _classCallCheck(this, SingularProxySandbox);
+
     /** 沙箱期间新增的全局变量 */
     this.addedPropsMapInSandbox = new Map();
     /** 沙箱期间更新的全局变量 */
@@ -38,19 +46,16 @@ function () {
     this.currentUpdatedPropsValueMap = new Map();
     this.sandboxRunning = true;
     this.name = name;
-
-    var _a = this,
-        sandboxRunning = _a.sandboxRunning,
-        addedPropsMapInSandbox = _a.addedPropsMapInSandbox,
-        modifiedPropsOriginalValueMapInSandbox = _a.modifiedPropsOriginalValueMapInSandbox,
-        currentUpdatedPropsValueMap = _a.currentUpdatedPropsValueMap;
-
-    var boundValueSymbol = Symbol('bound value');
+    this.type = SandBoxType.LegacyProxy;
+    var addedPropsMapInSandbox = this.addedPropsMapInSandbox,
+        modifiedPropsOriginalValueMapInSandbox = this.modifiedPropsOriginalValueMapInSandbox,
+        currentUpdatedPropsValueMap = this.currentUpdatedPropsValueMap;
+    var self = this;
     var rawWindow = window;
     var fakeWindow = Object.create(null);
     var proxy = new Proxy(fakeWindow, {
       set: function set(_, p, value) {
-        if (sandboxRunning) {
+        if (self.sandboxRunning) {
           if (!rawWindow.hasOwnProperty(p)) {
             addedPropsMapInSandbox.set(p, value);
           } else if (!modifiedPropsOriginalValueMapInSandbox.has(p)) {
@@ -67,7 +72,7 @@ function () {
         }
 
         if (process.env.NODE_ENV === 'development') {
-          console.warn("[qiankun] Set window." + p.toString() + " while sandbox destroyed or inactive in " + name + "!");
+          console.warn("[qiankun] Set window.".concat(p.toString(), " while sandbox destroyed or inactive in ").concat(name, "!"));
         } // 在 strict-mode 下，Proxy 的 handler.set 返回 false 会抛出 TypeError，在沙箱卸载的情况下应该忽略错误
 
 
@@ -82,29 +87,7 @@ function () {
         }
 
         var value = rawWindow[p];
-        /*
-        仅绑定 !isConstructable && isCallable 的函数对象，如 window.console、window.atob 这类。目前没有完美的检测方式，这里通过 prototype 中是否还有可枚举的拓展方法的方式来判断
-        @warning 这里不要随意替换成别的判断方式，因为可能触发一些 edge case（比如在 lodash.isFunction 在 iframe 上下文中可能由于调用了 top window 对象触发的安全异常）
-         */
-
-        if (typeof value === 'function' && !isConstructable(value)) {
-          if (value[boundValueSymbol]) {
-            return value[boundValueSymbol];
-          }
-
-          var boundValue_1 = value.bind(rawWindow); // some callable function has custom fields, we need to copy the enumerable props to boundValue. such as moment function.
-
-          Object.keys(value).forEach(function (key) {
-            return boundValue_1[key] = value[key];
-          });
-          Object.defineProperty(value, boundValueSymbol, {
-            enumerable: false,
-            value: boundValue_1
-          });
-          return boundValue_1;
-        }
-
-        return value;
+        return getTargetValue(rawWindow, value);
       },
       // trap in operator
       // see https://github.com/styled-components/styled-components/blob/master/packages/styled-components/src/constants.js#L12
@@ -115,33 +98,37 @@ function () {
     this.proxy = proxy;
   }
 
-  SingularProxySandbox.prototype.active = function () {
-    if (!this.sandboxRunning) {
-      this.currentUpdatedPropsValueMap.forEach(function (v, p) {
+  _createClass(SingularProxySandbox, [{
+    key: "active",
+    value: function active() {
+      if (!this.sandboxRunning) {
+        this.currentUpdatedPropsValueMap.forEach(function (v, p) {
+          return setWindowProp(p, v);
+        });
+      }
+
+      this.sandboxRunning = true;
+    }
+  }, {
+    key: "inactive",
+    value: function inactive() {
+      if (process.env.NODE_ENV === 'development') {
+        console.info("[qiankun:sandbox] ".concat(this.name, " modified global properties restore..."), [].concat(_toConsumableArray(this.addedPropsMapInSandbox.keys()), _toConsumableArray(this.modifiedPropsOriginalValueMapInSandbox.keys())));
+      } // renderSandboxSnapshot = snapshot(currentUpdatedPropsValueMapForSnapshot);
+      // restore global props to initial snapshot
+
+
+      this.modifiedPropsOriginalValueMapInSandbox.forEach(function (v, p) {
         return setWindowProp(p, v);
       });
+      this.addedPropsMapInSandbox.forEach(function (_, p) {
+        return setWindowProp(p, undefined, true);
+      });
+      this.sandboxRunning = false;
     }
-
-    this.sandboxRunning = true;
-  };
-
-  SingularProxySandbox.prototype.inactive = function () {
-    if (process.env.NODE_ENV === 'development') {
-      console.info("[qiankun:sandbox] " + this.name + " modified global properties restore...", __spread(this.addedPropsMapInSandbox.keys(), this.modifiedPropsOriginalValueMapInSandbox.keys()));
-    } // renderSandboxSnapshot = snapshot(currentUpdatedPropsValueMapForSnapshot);
-    // restore global props to initial snapshot
-
-
-    this.modifiedPropsOriginalValueMapInSandbox.forEach(function (v, p) {
-      return setWindowProp(p, v);
-    });
-    this.addedPropsMapInSandbox.forEach(function (_, p) {
-      return setWindowProp(p, undefined, true);
-    });
-    this.sandboxRunning = false;
-  };
+  }]);
 
   return SingularProxySandbox;
 }();
 
-export default SingularProxySandbox;
+export { SingularProxySandbox as default };

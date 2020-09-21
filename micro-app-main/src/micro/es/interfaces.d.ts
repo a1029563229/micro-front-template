@@ -31,6 +31,7 @@ export declare type LoadableApp<T extends object = {}> = AppMetadata & {
     container: string | HTMLElement;
 });
 export declare type RegistrableApp<T extends object = {}> = LoadableApp<T> & {
+    loader?: (loading: boolean) => void;
     activeRule: RegisterApplicationConfig['activeWhen'];
 };
 export declare type PrefetchStrategy = boolean | 'all' | string[] | ((apps: AppMetadata[]) => {
@@ -41,12 +42,17 @@ declare type QiankunSpecialOpts = {
     prefetch?: PrefetchStrategy;
     sandbox?: boolean | {
         strictStyleIsolation?: boolean;
+        experimentalStyleIsolation?: boolean;
         patchers?: Patcher[];
     };
     singular?: boolean | ((app: LoadableApp<any>) => Promise<boolean>);
+    /**
+     * skip some scripts or links intercept, like JSONP
+     */
+    excludeAssetFilter?: (url: string) => boolean;
 };
 export declare type FrameworkConfiguration = QiankunSpecialOpts & ImportEntryOpts & StartOpts;
-export declare type LifeCycleFn<T extends object> = (app: LoadableApp<T>) => Promise<any>;
+export declare type LifeCycleFn<T extends object> = (app: LoadableApp<T>, global: typeof window) => Promise<any>;
 export declare type FrameworkLifeCycles<T extends object> = {
     beforeLoad?: LifeCycleFn<T> | Array<LifeCycleFn<T>>;
     beforeMount?: LifeCycleFn<T> | Array<LifeCycleFn<T>>;
@@ -58,9 +64,16 @@ export declare type MicroApp = Parcel;
 export declare type Rebuilder = () => void;
 export declare type Freer = () => Rebuilder;
 export declare type Patcher = () => Freer;
+export declare enum SandBoxType {
+    Proxy = "Proxy",
+    Snapshot = "Snapshot",
+    LegacyProxy = "LegacyProxy"
+}
 export interface SandBox {
     /** 沙箱的名字 */
     name: string;
+    /** 沙箱的类型 */
+    type: SandBoxType;
     /** 沙箱导出的代理实体 */
     proxy: WindowProxy;
     /** 沙箱是否在运行中 */

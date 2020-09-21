@@ -1,41 +1,33 @@
 import _noop from "lodash/noop";
-
-/**
- * @author Kuitos
- * @since 2019-04-11
- */
-import { __read, __spread } from "tslib";
+import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 var rawWindowInterval = window.setInterval;
 var rawWindowClearInterval = window.clearInterval;
-export default function patch() {
-  var intervals = []; // @ts-ignore
+export default function patch(global) {
+  var intervals = [];
 
-  window.clearInterval = function (intervalId) {
+  global.clearInterval = function (intervalId) {
     intervals = intervals.filter(function (id) {
       return id !== intervalId;
     });
     return rawWindowClearInterval(intervalId);
-  }; // @ts-ignore
+  };
 
-
-  window.setInterval = function (handler, timeout) {
-    var args = [];
-
-    for (var _i = 2; _i < arguments.length; _i++) {
-      args[_i - 2] = arguments[_i];
+  global.setInterval = function (handler, timeout) {
+    for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+      args[_key - 2] = arguments[_key];
     }
 
-    var intervalId = rawWindowInterval.apply(void 0, __spread([handler, timeout], args));
-    intervals = __spread(intervals, [intervalId]);
+    var intervalId = rawWindowInterval.apply(void 0, [handler, timeout].concat(args));
+    intervals = [].concat(_toConsumableArray(intervals), [intervalId]);
     return intervalId;
   };
 
   return function free() {
     intervals.forEach(function (id) {
-      return window.clearInterval(id);
+      return global.clearInterval(id);
     });
-    window.setInterval = rawWindowInterval;
-    window.clearInterval = rawWindowClearInterval;
+    global.setInterval = rawWindowInterval;
+    global.clearInterval = rawWindowClearInterval;
     return _noop;
   };
 }

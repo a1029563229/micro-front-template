@@ -1,10 +1,11 @@
 import _isFunction from "lodash/isFunction";
+import _regeneratorRuntime from "@babel/runtime/regenerator";
 
 /**
  * @author Kuitos
  * @since 2019-02-26
  */
-import { __awaiter, __generator } from "tslib";
+import { __awaiter } from "tslib";
 import { importEntry } from 'import-html-entry';
 import { getMountedApps } from 'single-spa'; // RIC and shim for browsers setTimeout() without it
 
@@ -18,11 +19,9 @@ var requestIdleCallback = window.requestIdleCallback || function requestIdleCall
       }
     });
   }, 1);
-}; // https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
+};
 
-
-var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-var isSlowNetwork = navigator.connection ? navigator.connection.saveData || /(2|3)g/.test(navigator.connection.effectiveType) : false;
+var isSlowNetwork = navigator.connection ? navigator.connection.saveData || navigator.connection.type !== 'wifi' && navigator.connection.type !== 'ethernet' && /(2|3)g/.test(navigator.connection.effectiveType) : false;
 /**
  * prefetch assets, do nothing while in mobile network
  * @param entry
@@ -32,32 +31,36 @@ var isSlowNetwork = navigator.connection ? navigator.connection.saveData || /(2|
 function prefetch(entry, opts) {
   var _this = this;
 
-  if (isMobile || isSlowNetwork) {
-    // Don't prefetch if an mobile device or in a slow network.
+  if (isSlowNetwork) {
+    // Don't prefetch if in a slow network.
     return;
   }
 
   requestIdleCallback(function () {
-    return __awaiter(_this, void 0, void 0, function () {
-      var _a, getExternalScripts, getExternalStyleSheets;
+    return __awaiter(_this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
+      var _yield$importEntry, getExternalScripts, getExternalStyleSheets;
 
-      return __generator(this, function (_b) {
-        switch (_b.label) {
-          case 0:
-            return [4
-            /*yield*/
-            , importEntry(entry, opts)];
+      return _regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return importEntry(entry, opts);
 
-          case 1:
-            _a = _b.sent(), getExternalScripts = _a.getExternalScripts, getExternalStyleSheets = _a.getExternalStyleSheets;
-            requestIdleCallback(getExternalStyleSheets);
-            requestIdleCallback(getExternalScripts);
-            return [2
-            /*return*/
-            ];
+            case 2:
+              _yield$importEntry = _context.sent;
+              getExternalScripts = _yield$importEntry.getExternalScripts;
+              getExternalStyleSheets = _yield$importEntry.getExternalStyleSheets;
+              requestIdleCallback(getExternalStyleSheets);
+              requestIdleCallback(getExternalScripts);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
         }
-      });
-    });
+      }, _callee);
+    }));
   });
 }
 
@@ -69,11 +72,11 @@ function prefetchAfterFirstMounted(apps, opts) {
     });
 
     if (process.env.NODE_ENV === 'development') {
-      console.log("[qiankun] prefetch starting after " + mountedApps + " mounted...", notMountedApps);
+      console.log("[qiankun] prefetch starting after ".concat(mountedApps, " mounted..."), notMountedApps);
     }
 
-    notMountedApps.forEach(function (_a) {
-      var entry = _a.entry;
+    notMountedApps.forEach(function (_ref) {
+      var entry = _ref.entry;
       return prefetch(entry, opts);
     });
     window.removeEventListener('single-spa:first-mount', listener);
@@ -85,13 +88,13 @@ export function prefetchImmediately(apps, opts) {
     console.log('[qiankun] prefetch starting for apps...', apps);
   }
 
-  apps.forEach(function (_a) {
-    var entry = _a.entry;
+  apps.forEach(function (_ref2) {
+    var entry = _ref2.entry;
     return prefetch(entry, opts);
   });
 }
 export function doPrefetchStrategy(apps, prefetchStrategy, importEntryOpts) {
-  var _this = this;
+  var _this2 = this;
 
   var appsName2Apps = function appsName2Apps(names) {
     return apps.filter(function (app) {
@@ -103,26 +106,32 @@ export function doPrefetchStrategy(apps, prefetchStrategy, importEntryOpts) {
     prefetchAfterFirstMounted(appsName2Apps(prefetchStrategy), importEntryOpts);
   } else if (_isFunction(prefetchStrategy)) {
     (function () {
-      return __awaiter(_this, void 0, void 0, function () {
-        var _a, _b, criticalAppNames, _c, minorAppsName;
+      return __awaiter(_this2, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee2() {
+        var _yield$prefetchStrate, _yield$prefetchStrate2, criticalAppNames, _yield$prefetchStrate3, minorAppsName;
 
-        return __generator(this, function (_d) {
-          switch (_d.label) {
-            case 0:
-              return [4
-              /*yield*/
-              , prefetchStrategy(apps)];
+        return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return prefetchStrategy(apps);
 
-            case 1:
-              _a = _d.sent(), _b = _a.criticalAppNames, criticalAppNames = _b === void 0 ? [] : _b, _c = _a.minorAppsName, minorAppsName = _c === void 0 ? [] : _c;
-              prefetchImmediately(appsName2Apps(criticalAppNames), importEntryOpts);
-              prefetchAfterFirstMounted(appsName2Apps(minorAppsName), importEntryOpts);
-              return [2
-              /*return*/
-              ];
+              case 2:
+                _yield$prefetchStrate = _context2.sent;
+                _yield$prefetchStrate2 = _yield$prefetchStrate.criticalAppNames;
+                criticalAppNames = _yield$prefetchStrate2 === void 0 ? [] : _yield$prefetchStrate2;
+                _yield$prefetchStrate3 = _yield$prefetchStrate.minorAppsName;
+                minorAppsName = _yield$prefetchStrate3 === void 0 ? [] : _yield$prefetchStrate3;
+                prefetchImmediately(appsName2Apps(criticalAppNames), importEntryOpts);
+                prefetchAfterFirstMounted(appsName2Apps(minorAppsName), importEntryOpts);
+
+              case 9:
+              case "end":
+                return _context2.stop();
+            }
           }
-        });
-      });
+        }, _callee2);
+      }));
     })();
   } else {
     switch (prefetchStrategy) {

@@ -19,8 +19,9 @@ declare global {
     }
     interface Navigator {
         connection: {
-            saveData: Function;
+            saveData: boolean;
             effectiveType: string;
+            type: 'bluetooth' | 'cellular' | 'ethernet' | 'none' | 'wifi' | 'wimax' | 'other' | 'unknown';
         };
     }
 }

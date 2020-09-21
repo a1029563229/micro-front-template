@@ -1,5 +1,5 @@
 import { Freer } from '../../interfaces';
-declare const styledComponentSymbol = "Symbol(styled-component-qiankun)";
+declare const styledComponentSymbol: unique symbol;
 declare global {
     interface HTMLStyleElement {
         [styledComponentSymbol]?: CSSRuleList;
@@ -14,6 +14,8 @@ declare global {
  * @param proxy
  * @param mounting
  * @param singular
+ * @param scopedCSS
+ * @param excludeAssetFilter
  */
-export default function patch(appName: string, appWrapperGetter: () => HTMLElement | ShadowRoot, proxy: Window, mounting?: boolean, singular?: boolean): Freer;
+export default function patch(appName: string, appWrapperGetter: () => HTMLElement | ShadowRoot, proxy: Window, mounting?: boolean, singular?: boolean, scopedCSS?: boolean, excludeAssetFilter?: CallableFunction): Freer;
 export {};

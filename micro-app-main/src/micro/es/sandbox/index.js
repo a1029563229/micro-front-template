@@ -1,8 +1,11 @@
-import { __awaiter, __generator, __read, __spread } from "tslib";
+import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
+import _regeneratorRuntime from "@babel/runtime/regenerator";
+import { __awaiter } from "tslib";
 import LegacySandbox from './legacy/sandbox';
 import { patchAtBootstrapping, patchAtMounting } from './patchers';
 import ProxySandbox from './proxySandbox';
 import SnapshotSandbox from './snapshotSandbox';
+export { css } from './patchers';
 /**
  * 生成应用运行时沙箱
  *
@@ -18,12 +21,11 @@ import SnapshotSandbox from './snapshotSandbox';
  * @param appName
  * @param elementGetter
  * @param singular
+ * @param scopedCSS
+ * @param excludeAssetFilter
  */
 
-export function createSandbox(appName, elementGetter, singular) {
-  // mounting freers are one-off and should be re-init at every mounting time
-  var mountingFreers = [];
-  var sideEffectsRebuilders = [];
+export function createSandbox(appName, elementGetter, singular, scopedCSS, excludeAssetFilter) {
   var sandbox;
 
   if (window.Proxy) {
@@ -33,7 +35,10 @@ export function createSandbox(appName, elementGetter, singular) {
   } // some side effect could be be invoked while bootstrapping, such as dynamic stylesheet injection with style-loader, especially during the development phase
 
 
-  var bootstrappingFreers = patchAtBootstrapping(appName, elementGetter, sandbox.proxy, singular);
+  var bootstrappingFreers = patchAtBootstrapping(appName, elementGetter, sandbox, singular, scopedCSS, excludeAssetFilter); // mounting freers are one-off and should be re-init at every mounting time
+
+  var mountingFreers = [];
+  var sideEffectsRebuilders = [];
   return {
     proxy: sandbox.proxy,
 
@@ -43,62 +48,73 @@ export function createSandbox(appName, elementGetter, singular) {
      * 也可能是从 unmount 之后再次唤醒进入 mount
      */
     mount: function mount() {
-      return __awaiter(this, void 0, void 0, function () {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
         var sideEffectsRebuildersAtBootstrapping, sideEffectsRebuildersAtMounting;
-        return __generator(this, function (_a) {
-          sideEffectsRebuildersAtBootstrapping = sideEffectsRebuilders.slice(0, bootstrappingFreers.length);
-          sideEffectsRebuildersAtMounting = sideEffectsRebuilders.slice(bootstrappingFreers.length); // must rebuild the side effects which added at bootstrapping firstly to recovery to nature state
+        return _regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                /* ------------------------------------------ 因为有上下文依赖（window），以下代码执行顺序不能变 ------------------------------------------ */
 
-          if (sideEffectsRebuildersAtBootstrapping.length) {
-            sideEffectsRebuildersAtBootstrapping.forEach(function (rebuild) {
-              return rebuild();
-            });
+                /* ------------------------------------------ 1. 启动/恢复 沙箱------------------------------------------ */
+                sandbox.active();
+                sideEffectsRebuildersAtBootstrapping = sideEffectsRebuilders.slice(0, bootstrappingFreers.length);
+                sideEffectsRebuildersAtMounting = sideEffectsRebuilders.slice(bootstrappingFreers.length); // must rebuild the side effects which added at bootstrapping firstly to recovery to nature state
+
+                if (sideEffectsRebuildersAtBootstrapping.length) {
+                  sideEffectsRebuildersAtBootstrapping.forEach(function (rebuild) {
+                    return rebuild();
+                  });
+                }
+                /* ------------------------------------------ 2. 开启全局变量补丁 ------------------------------------------*/
+                // render 沙箱启动时开始劫持各类全局监听，尽量不要在应用初始化阶段有 事件监听/定时器 等副作用
+
+
+                mountingFreers = patchAtMounting(appName, elementGetter, sandbox, singular, scopedCSS, excludeAssetFilter);
+                /* ------------------------------------------ 3. 重置一些初始化时的副作用 ------------------------------------------*/
+                // 存在 rebuilder 则表明有些副作用需要重建
+
+                if (sideEffectsRebuildersAtMounting.length) {
+                  sideEffectsRebuildersAtMounting.forEach(function (rebuild) {
+                    return rebuild();
+                  });
+                } // clean up rebuilders
+
+
+                sideEffectsRebuilders = [];
+
+              case 7:
+              case "end":
+                return _context.stop();
+            }
           }
-          /* ------------------------------------------ 因为有上下文依赖（window），以下代码执行顺序不能变 ------------------------------------------ */
-
-          /* ------------------------------------------ 1. 启动/恢复 沙箱------------------------------------------ */
-
-
-          sandbox.active();
-          /* ------------------------------------------ 2. 开启全局变量补丁 ------------------------------------------*/
-          // render 沙箱启动时开始劫持各类全局监听，尽量不要在应用初始化阶段有 事件监听/定时器 等副作用
-
-          mountingFreers = patchAtMounting(appName, elementGetter, sandbox.proxy, singular);
-          /* ------------------------------------------ 3. 重置一些初始化时的副作用 ------------------------------------------*/
-          // 存在 rebuilder 则表明有些副作用需要重建
-
-          if (sideEffectsRebuildersAtMounting.length) {
-            sideEffectsRebuildersAtMounting.forEach(function (rebuild) {
-              return rebuild();
-            });
-          } // clean up rebuilders
-
-
-          sideEffectsRebuilders = [];
-          return [2
-          /*return*/
-          ];
-        });
-      });
+        }, _callee);
+      }));
     },
 
     /**
      * 恢复 global 状态，使其能回到应用加载之前的状态
      */
     unmount: function unmount() {
-      return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-          // record the rebuilders of window side effects (event listeners or timers)
-          // note that the frees of mounting phase are one-off as it will be re-init at next mounting
-          sideEffectsRebuilders = __spread(bootstrappingFreers, mountingFreers).map(function (free) {
-            return free();
-          });
-          sandbox.inactive();
-          return [2
-          /*return*/
-          ];
-        });
-      });
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee2() {
+        return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                // record the rebuilders of window side effects (event listeners or timers)
+                // note that the frees of mounting phase are one-off as it will be re-init at next mounting
+                sideEffectsRebuilders = [].concat(_toConsumableArray(bootstrappingFreers), _toConsumableArray(mountingFreers)).map(function (free) {
+                  return free();
+                });
+                sandbox.inactive();
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
     }
   };
 }

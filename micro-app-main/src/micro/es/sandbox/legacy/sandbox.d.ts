@@ -2,7 +2,7 @@
  * @author Kuitos
  * @since 2019-04-11
  */
-import { SandBox } from '../../interfaces';
+import { SandBox, SandBoxType } from '../../interfaces';
 /**
  * 基于 Proxy 实现的沙箱
  * TODO: 为了兼容性 singular 模式下依旧使用该沙箱，等新沙箱稳定之后再切换
@@ -16,6 +16,7 @@ export default class SingularProxySandbox implements SandBox {
     private currentUpdatedPropsValueMap;
     name: string;
     proxy: WindowProxy;
+    type: SandBoxType;
     sandboxRunning: boolean;
     active(): void;
     inactive(): void;

@@ -18,15 +18,15 @@ export function interceptSystemJsProps(p, value) {
   }
 } // FIXME see interceptSystemJsProps function
 
-export function clearSystemJsProps(map, allInactive) {
+export function clearSystemJsProps(global, allInactive) {
   if (!allInactive) return;
 
-  if (map.has('System')) {
+  if (global.hasOwnProperty('System')) {
     // @ts-ignore
     delete window.System;
   }
 
-  if (map.has('__cjsWrapper')) {
+  if (global.hasOwnProperty('__cjsWrapper')) {
     // @ts-ignore
     delete window.__cjsWrapper;
   }

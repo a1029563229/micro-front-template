@@ -1,9 +1,11 @@
 import _regeneratorRuntime from "@babel/runtime/regenerator";
+
+/**
+ * @author Kuitos
+ * @since 2020-05-15
+ */
 import { __awaiter } from "tslib";
-var rawPublicPath = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
 export default function getAddOn(global) {
-  var publicPath = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '/';
-  var hasMountedOnce = false;
   return {
     beforeLoad: function beforeLoad() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
@@ -12,7 +14,7 @@ export default function getAddOn(global) {
             switch (_context.prev = _context.next) {
               case 0:
                 // eslint-disable-next-line no-param-reassign
-                global.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ = publicPath;
+                global.__POWERED_BY_QIANKUN__ = true;
 
               case 1:
               case "end":
@@ -28,10 +30,8 @@ export default function getAddOn(global) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                if (hasMountedOnce) {
-                  // eslint-disable-next-line no-param-reassign
-                  global.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ = publicPath;
-                }
+                // eslint-disable-next-line no-param-reassign
+                global.__POWERED_BY_QIANKUN__ = true;
 
               case 1:
               case "end":
@@ -47,17 +47,10 @@ export default function getAddOn(global) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                if (rawPublicPath === undefined) {
-                  // eslint-disable-next-line no-param-reassign
-                  delete global.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
-                } else {
-                  // eslint-disable-next-line no-param-reassign
-                  global.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ = rawPublicPath;
-                }
+                // eslint-disable-next-line no-param-reassign
+                delete global.__POWERED_BY_QIANKUN__;
 
-                hasMountedOnce = true;
-
-              case 2:
+              case 1:
               case "end":
                 return _context3.stop();
             }

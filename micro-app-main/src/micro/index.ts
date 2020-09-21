@@ -7,7 +7,7 @@ import {
   registerMicroApps,
   addGlobalUncaughtErrorHandler,
   start,
-} from "./es";
+} from "qiankun";
 
 // 子应用注册信息
 import apps from "./apps";

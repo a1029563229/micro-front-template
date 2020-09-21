@@ -1,3 +1,4 @@
+export { css } from './patchers';
 /**
  * 生成应用运行时沙箱
  *
@@ -13,8 +14,10 @@
  * @param appName
  * @param elementGetter
  * @param singular
+ * @param scopedCSS
+ * @param excludeAssetFilter
  */
-export declare function createSandbox(appName: string, elementGetter: () => HTMLElement | ShadowRoot, singular: boolean): {
+export declare function createSandbox(appName: string, elementGetter: () => HTMLElement | ShadowRoot, singular: boolean, scopedCSS: boolean, excludeAssetFilter?: (url: string) => boolean): {
     proxy: Window;
     /**
      * 沙箱被 mount

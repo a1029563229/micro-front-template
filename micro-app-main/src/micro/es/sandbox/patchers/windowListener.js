@@ -1,22 +1,17 @@
 import _noop from "lodash/noop";
-
-/**
- * @author Kuitos
- * @since 2019-04-11
- */
-import { __read, __spread } from "tslib";
+import _toConsumableArray from "@babel/runtime/helpers/esm/toConsumableArray";
 var rawAddEventListener = window.addEventListener;
 var rawRemoveEventListener = window.removeEventListener;
-export default function patch() {
+export default function patch(global) {
   var listenerMap = new Map();
 
-  window.addEventListener = function (type, listener, options) {
+  global.addEventListener = function (type, listener, options) {
     var listeners = listenerMap.get(type) || [];
-    listenerMap.set(type, __spread(listeners, [listener]));
+    listenerMap.set(type, [].concat(_toConsumableArray(listeners), [listener]));
     return rawAddEventListener.call(window, type, listener, options);
   };
 
-  window.removeEventListener = function (type, listener, options) {
+  global.removeEventListener = function (type, listener, options) {
     var storedTypeListeners = listenerMap.get(type);
 
     if (storedTypeListeners && storedTypeListeners.length && storedTypeListeners.indexOf(listener) !== -1) {
@@ -28,12 +23,12 @@ export default function patch() {
 
   return function free() {
     listenerMap.forEach(function (listeners, type) {
-      return __spread(listeners).forEach(function (listener) {
-        return window.removeEventListener(type, listener);
+      return _toConsumableArray(listeners).forEach(function (listener) {
+        return global.removeEventListener(type, listener);
       });
     });
-    window.addEventListener = rawAddEventListener;
-    window.removeEventListener = rawRemoveEventListener;
+    global.addEventListener = rawAddEventListener;
+    global.removeEventListener = rawRemoveEventListener;
     return _noop;
   };
 }
