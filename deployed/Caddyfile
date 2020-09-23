@@ -1,4 +1,4 @@
-http://www.micro-app-front.com {
+http://localhost:10000 {
      root * ./micro-app-main
      file_server
      try_files {path} ./index.html

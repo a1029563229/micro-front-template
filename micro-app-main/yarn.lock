@@ -776,7 +776,14 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.10.5":
+  version "7.11.2"
+  resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.11.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.11.2.tgz#f549c13c754cc40b87644b9fa9f09a6a95fe0736"
+  integrity sha1-9UnBPHVMxAuHZEufqfCaapX+BzY=
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.9.6"
   resolved "https://registry.npm.taobao.org/@babel/runtime/download/@babel/runtime-7.9.6.tgz?cache=0&sync_timestamp=1588185905751&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40babel%2Fruntime%2Fdownload%2F%40babel%2Fruntime-7.9.6.tgz#a9102eb5cadedf3f31d08a9ecf294af7827ea29f"
   integrity sha1-qRAutcre3z8x0IqezylK94J+op8=
@@ -4520,10 +4527,17 @@ import-from@^2.1.0:
   dependencies:
     resolve-from "^3.0.0"
 
-import-html-entry@^1.5.1, import-html-entry@^1.7.0:
+import-html-entry@^1.5.1:
   version "1.7.2"
   resolved "https://registry.npm.taobao.org/import-html-entry/download/import-html-entry-1.7.2.tgz#9db8a6af527c915e99691a59d8463ace339f8fa1"
   integrity sha1-nbimr1J8kV6ZaRpZ2EY6zjOfj6E=
+  dependencies:
+    "@babel/runtime" "^7.7.2"
+
+import-html-entry@^1.9.0:
+  version "1.9.1"
+  resolved "https://registry.npm.taobao.org/import-html-entry/download/import-html-entry-1.9.1.tgz?cache=0&sync_timestamp=1599035222889&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fimport-html-entry%2Fdownload%2Fimport-html-entry-1.9.1.tgz#91a846ab3ddad1f9a4b876a595d1e8b28bef7609"
+  integrity sha1-kahGqz3a0fmkuHalldHosovvdgk=
   dependencies:
     "@babel/runtime" "^7.7.2"
 
@@ -6846,13 +6860,13 @@ q@^1.1.2:
   resolved "https://registry.npm.taobao.org/q/download/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
-qiankun@^2.0.11:
-  version "2.0.11"
-  resolved "https://registry.npm.taobao.org/qiankun/download/qiankun-2.0.11.tgz#8665cf5a0b5c72d09c262f0838f9b8075cb86ec8"
-  integrity sha1-hmXPWgtcctCcJi8IOPm4B1y4bsg=
+qiankun@^2.0.20:
+  version "2.0.25"
+  resolved "https://registry.npm.taobao.org/qiankun/download/qiankun-2.0.25.tgz?cache=0&sync_timestamp=1600072690991&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fqiankun%2Fdownload%2Fqiankun-2.0.25.tgz#c1807ea03dd2ff420a7182469cb8458cae15e80c"
+  integrity sha1-wYB+oD3S/0IKcYJGnLhFjK4V6Aw=
   dependencies:
-    "@babel/runtime" "^7.5.5"
-    import-html-entry "^1.7.0"
+    "@babel/runtime" "^7.10.5"
+    import-html-entry "^1.9.0"
     lodash "^4.17.11"
     single-spa "^5.3.1"
     tslib "^1.10.0"

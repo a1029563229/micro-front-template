@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve --mode basic",
+    "build:test": "vue-cli-service build --mode basic",
+    "build": "vue-cli-service build --mode prod",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -15,7 +16,7 @@
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "nprogress": "^0.2.0",
-    "qiankun": "^2.0.11",
+    "qiankun": "^2.0.20",
     "redux": "^4.0.5",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",

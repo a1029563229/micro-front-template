@@ -1,5 +1,6 @@
 import config from "@/config";
 
+console.log(config);
 const {
   REACT_MICRO_APP,
   VUE_MICRO_APP,
