@@ -1,41 +1,41 @@
-http://localhost:10000 {
-     root * ./micro-app-main
-     file_server
-     try_files {path} ./index.html
+http://localhost:9999 {
+     root * ./micro-app-main  # 网站根目录，这里选用主应用构建后的文件目录
+     file_server  # 启用文件服务
+     try_files {path} ./index.html   # 兼容 history 路由模式，找不到的文件直接重定向到 index.html 
 }
 
-http://vue.micro-app-front.com {
-     root * ./micro-app-vue
-     file_server
-     try_files {path} ./index.html
-     header Access-Control-Allow-Origin *
-     header Access-Control-Allow-Headers *
-     header Access-Control-Allow-Methods *
+http://localhost:10100 {
+     root * ./micro-app-react  # 网站根目录，这里选用 react 子应用构建后的文件目录
+     file_server  # 启用文件服务
+     try_files {path} ./index.html   # 兼容 history 路由模式，找不到的文件直接重定向到 index.html 
+     header Access-Control-Allow-Origin *   # 配置允许跨域请求的 Origin
+     header Access-Control-Allow-Headers *  # 配置允许跨域请求的方法
+     header Access-Control-Allow-Methods *  # 配置允许跨域请求的 header
 }
 
-http://react.micro-app-front.com {
-     root * ./micro-app-react
-     file_server
-     try_files {path} ./index.html
-     header Access-Control-Allow-Origin *
-     header Access-Control-Allow-Headers *
-     header Access-Control-Allow-Methods *
+http://localhost:10200 {
+     root * ./micro-app-vue  # 网站根目录，这里选用 vue 子应用构建后的文件目录
+     file_server  # 启用文件服务
+     try_files {path} ./index.html   # 兼容 history 路由模式，找不到的文件直接重定向到 index.html 
+     header Access-Control-Allow-Origin *   # 配置允许跨域请求的 Origin
+     header Access-Control-Allow-Headers *  # 配置允许跨域请求的方法
+     header Access-Control-Allow-Methods *  # 配置允许跨域请求的 header
 }
 
-http://angular.micro-app-front.com {
-     root * ./micro-app-angular
-     file_server
-     try_files {path} ./index.html
-     header Access-Control-Allow-Origin *
-     header Access-Control-Allow-Headers *
-     header Access-Control-Allow-Methods *
+http://localhost:10300 {
+     root * ./micro-app-angular  # 网站根目录，这里选用 angular 子应用构建后的文件目录
+     file_server  # 启用文件服务
+     try_files {path} ./index.html   # 兼容 history 路由模式，找不到的文件直接重定向到 index.html 
+     header Access-Control-Allow-Origin *   # 配置允许跨域请求的 Origin
+     header Access-Control-Allow-Headers *  # 配置允许跨域请求的方法
+     header Access-Control-Allow-Methods *  # 配置允许跨域请求的 header
 }
 
-http://static.micro-app-front.com {
-     root * ./micro-app-static
-     file_server
-     try_files {path} ./index.html
-     header Access-Control-Allow-Origin *
-     header Access-Control-Allow-Headers *
-     header Access-Control-Allow-Methods *
+http://localhost:10400 {
+     root * ./micro-app-static  # 网站根目录，这里选用 static 子应用构建后的文件目录
+     file_server  # 启用文件服务
+     try_files {path} ./index.html   # 兼容 history 路由模式，找不到的文件直接重定向到 index.html 
+     header Access-Control-Allow-Origin *   # 配置允许跨域请求的 Origin
+     header Access-Control-Allow-Headers *  # 配置允许跨域请求的方法
+     header Access-Control-Allow-Methods *  # 配置允许跨域请求的 header
 }
