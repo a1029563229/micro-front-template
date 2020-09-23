@@ -33,6 +33,7 @@ yarn examples:start
 本系列配套教程：
 
 - [基于 qiankun 的微前端最佳实践（万字长文） - 从 0 到 1 篇](https://github.com/a1029563229/Blogs/tree/master/BestPractices/qiankun/Start.md)
+- [基于 qiankun 的微前端最佳实践（图文并茂） - 应用部署篇](https://github.com/a1029563229/Blogs/tree/master/BestPractices/qiankun/Deploy.md)
 - [基于 qiankun 的微前端最佳实践（图文并茂） - 应用间通信篇](https://github.com/a1029563229/Blogs/tree/master/BestPractices/qiankun/Communication.md)
 - [万字长文+图文并茂+全面解析微前端框架 qiankun 源码 - qiankun 篇](https://github.com/a1029563229/Blogs/tree/master/Source-Code/qiankun/1.md)
 
@@ -42,7 +43,6 @@ yarn examples:start
 
  - 生命周期篇；
  - IE 兼容篇；
- - 生产环境部署篇；
  - 性能优化、缓存方案篇；
 
 ## 分支说明
@@ -51,6 +51,7 @@ yarn examples:start
 
   - `master`：稳定分支，可以直接作为 `qiankun-quick-start` 使用；
   - `feature-inject-sub-apps`：主应用基座搭建、微应用接入方案；
+  - `feature-deploy`：应用部署发布方案；
   - `feature-communication`：官方通信方案；
   - `feature-communication-shared`：`Shared` 通信方案；
 
@@ -62,10 +63,4 @@ yarn examples:start
 
 在开发环境下，本项目配置了跨域解决方案，所以在直接运行项目并不会遇到跨域问题。
 
-<!-- ，生产环境的跨域问题可以参考下面的方案。 -->
-
-<!-- #### 扩展阅读
-
-本项目在生产环境（和开发环境），采用 `caddy` 解决应用间跨域问题及生产部署问题，`caddy` 的安装和使用可以参照 [`caddy` 入门教程](http://shadows-mall.oss-cn-shenzhen.aliyuncs.com/images/blogs/micro-front/4.png)。
-
-`caddy` 可以在本地开发和生产环境可以提供同一套跨域解决方案，建议使用。如果你不想使用 `caddy`，那么也可以通过其他方案（如 `nginx` 等等）解决跨域问题。 -->
+生产环境的跨域问题可以参考 `应用部署篇` 的方案。
