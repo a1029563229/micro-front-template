@@ -15,7 +15,7 @@ startQiankun();
 
 // 为 Angular 微应用所做的 zone 包注入
 // 如果没有 Angular 微应用，请删除这行代码
-import "zone.js/dist/zone";
+// (() => import("zone.js/dist/zone"))();
 
 /**
  * 注册路由实例
