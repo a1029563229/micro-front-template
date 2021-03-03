@@ -26,6 +26,6 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.fetchVegetable(1, 999);
+    // this.fetchVegetable(1, 999);
   }
 }

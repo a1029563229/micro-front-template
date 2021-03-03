@@ -25,26 +25,29 @@ const List = () => {
 
   useEffect(() => {
     console.log({ page });
-    (async () => {
-      const result = await fetchVegetable(page, 10);
-      const { vegetableList } = result.data;
-      setData(() => vegetableList.items);
-      setPageInfo(() => ({
-        current: vegetableList.page,
-        pageSize: vegetableList.pageSize,
-        total: vegetableList.total,
-        onChange: (page) => setPage(page),
-      }));
-    })();
+    // (async () => {
+    //   const result = await fetchVegetable(page, 10);
+    //   const { vegetableList } = result.data;
+    //   setData(() => vegetableList.items);
+    //   setPageInfo(() => ({
+    //     current: vegetableList.page,
+    //     pageSize: vegetableList.pageSize,
+    //     total: vegetableList.total,
+    //     onChange: (page) => setPage(page),
+    //   }));
+    // })();
   }, [page]);
 
   return (
     <Card title="React 子应用列表页">
-      <Table rowKey="_id" dataSource={data} pagination={pageInfo}>
+      <h2 style={{ fontSize: "26px", color: "#fb4487" }}>
+        曾经充满数据的一个列表（因服务器到期，此处数据已丢失）
+      </h2>
+      {/* <Table rowKey="_id" dataSource={data} pagination={pageInfo}>
         <Column dataIndex="poster" render={(text) => <Avatar src={text} />} />
         <Column dataIndex="name" />
         <Column dataIndex="price" render={(text) => <>￥ {text}</>} />
-      </Table>
+      </Table> */}
     </Card>
   );
 };

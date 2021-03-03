@@ -41,3 +41,10 @@ export async function unmount() {
   console.log("ReactMicroApp unmount");  
   ReactDOM.unmountComponentAtNode(document.getElementById("root"));
 }
+
+if (process.env.NODE_ENV === "development") {
+  window["ReactMicroApp"] = {};
+  window["ReactMicroApp"].bootstrap = bootstrap;
+  window["ReactMicroApp"].mount = mount;
+  window["ReactMicroApp"].unmount = unmount;
+}

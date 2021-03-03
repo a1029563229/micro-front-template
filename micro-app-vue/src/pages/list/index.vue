@@ -1,10 +1,11 @@
 <template>
   <section>
     <a-card title="Vue 微应用列表页">
-      <a-table rowKey="_id" :dataSource="data" :pagination="pageInfo">
+      <!-- <a-table rowKey="_id" :dataSource="data" :pagination="pageInfo">
         <a-table-column title="菜名" dataIndex="name" />
         <a-table-column title="价格" dataIndex="price" :customRender="(text) => `￥ ${text}`" />
-      </a-table>
+      </a-table> -->
+      <h2 class="old-title">曾经充满数据的一个列表（因服务器到期，此处数据已丢失）</h2>
     </a-card>
   </section>
 </template>
@@ -46,7 +47,14 @@ export default {
   },
 
   created() {
-    this.fetchVegetable(1, 10);
+    // this.fetchVegetable(1, 10);
   }
 }
 </script>
+
+<style lang="less" scoped>
+.old-title {
+  font-size: 26px;
+  color: #fb4487;
+}
+</style>

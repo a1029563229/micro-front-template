@@ -6,32 +6,21 @@ import SharedModule from "@/shared";
 import { ApiGetUserInfo } from "@/apis";
 
 const Status = () => {
-  const history = useHistory();
-
-  const [token, setToken] = useState();
-  useEffect(() => {
-    const shared = SharedModule.getShared();
-    const token = shared.getToken();
-
-    // 未登录 - 返回主页
-    if (!token) {
-      message.error("未检测到登录信息！");
-      return history.push("/");
-    }
-    
-    setToken(token);
-  }, [history]);
-
   const [userInfo, setUserInfo] = useState();
   useEffect(() => {
     if (!token) return;
 
     (async () => {
-      const result = await ApiGetUserInfo(token);
-      console.log(result);
-      setUserInfo(result.data.getUserInfo);
+      setUserInfo({
+        nickname: "shadows",
+        avatarUrl: "",
+        gender: 1,
+        country: "中国",
+        province: "广东",
+        city: "深圳",
+      });
     })();
-  }, [token]);
+  }, []);
 
   if (!userInfo) return null;
 

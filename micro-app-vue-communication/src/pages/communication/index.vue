@@ -36,24 +36,19 @@ export default {
   },
 
   mounted() {
-    const shared = SharedModule.getShared();
-    // 使用 shared 获取 token
-    const token = shared.getToken();
-
-    // 未登录 - 返回主页
-    if (!token) {
-      this.$message.error("未检测到登录信息！");
-      return this.$router.push("/");
-    }
-
-    this.getUserInfo(token);
+    this.getUserInfo();
   },
 
   methods: {
-    async getUserInfo(token) {
-      // ApiGetUserInfo 是用于获取用户信息的函数
-      const result = await ApiGetUserInfo(token);
-      this.userInfo = result.data.getUserInfo;
+    async getUserInfo() {
+      this.userInfo = {
+        nickname: "shadows",
+        avatarUrl: "",
+        gender: 1,
+        country: "中国",
+        province: "广东",
+        city: "深圳",
+      };
     }
   }
 };
