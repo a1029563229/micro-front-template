@@ -25,17 +25,18 @@
      * 请求接口数据，构建 HTML
      */
     async function buildHTML() {
-      const result = await fetch("http://dev-api.jt-gmall.com/mall", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // graphql 的查询风格
-        body: JSON.stringify({
-          query: `{ vegetableList (page: 1, pageSize: 20) { page, pageSize, total, items { _id, name, poster, price } } }`,
-        }),
-      }).then((res) => res.json());
-      const list = result.data.vegetableList.items;
+      // const result = await fetch("http://dev-api.jt-gmall.com/mall", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   // graphql 的查询风格
+      //   body: JSON.stringify({
+      //     query: `{ vegetableList (page: 1, pageSize: 20) { page, pageSize, total, items { _id, name, poster, price } } }`,
+      //   }),
+      // }).then((res) => res.json());
+      // const list = result.data.vegetableList.items;
+      const list = [];
       const html = `<table class="table">
   <thead>
     <tr>
