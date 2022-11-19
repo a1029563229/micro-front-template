@@ -10,8 +10,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1",
-    "styled-jsx": "^3.2.5"
+    "react-scripts": "5.0.1",
+    "styled-jsx": "^5.1.0"
   },
   "devDependencies": {
     "npm-force-resolutions": "^0.0.3",
